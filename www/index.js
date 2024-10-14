@@ -1,10 +1,21 @@
-import os from "os";
-import {add, minus} from "./my_math.js";
+import fs from "fs";
 
-let res = os;
 
-const res2 = add(4, 5);
-console.log(res2)
+// const result = fs.readFileSync('./www/some.txt', 'utf-8')
+// fs.writeFileSync('./www/some.txt', result + '\nHello, world!')
 
-// console.log(res);
 
+// console.log({ result })
+
+// fs.readFile('./www/some.txt', 'utf-8', (err, data) => {
+//     console.log({data})
+//     fs.writeFile('./www/some.txt', data + '\n some text 2', (err, succ) => console.log("success"));
+// });
+
+// fs.mkdir('./www/text-files2', () => {
+//     fs.writeFile('./www/text-files2/some.txt', "Hallo", () => console.log("success"))
+// })
+
+// fs.unlink('./www/text-files2/some.txt', () => {
+//     fs.rmdir('./www/text-files2', () => { })
+// })
