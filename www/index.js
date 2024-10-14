@@ -1,38 +1,31 @@
-import fs from "fs";
-import http from "http"
+import express from "express";
+import { fileURLToPath } from "url"
+import path from "path"
 
-// const result = fs.readFileSync('./www/some.txt', 'utf-8')
-// fs.writeFileSync('./www/some.txt', result + '\nHello, world!')
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
+const app = express();
 
-// console.log({ result })
+app.set('view engine', 'ejs')
 
-// fs.readFile('./www/some.txt', 'utf-8', (err, data) => {
-//     console.log({data})
-//     fs.writeFile('./www/some.txt', data + '\n some text 2', (err, succ) => console.log("success"));
-// });
-
-// fs.mkdir('./www/text-files2', () => {
-//     fs.writeFile('./www/text-files2/some.txt', "Hallo", () => console.log("success"))
-// })
-
-// fs.unlink('./www/text-files2/some.txt', () => {
-//     fs.rmdir('./www/text-files2', () => { })
-// })
-
-const server = http.createServer((req, res) => {
-    res.writeHead(200, {
-        'Content-Type': 'text/html; charset=utf-8'
-    });
-
-    if (req.url == "/") fs.createReadStream('./www/index.html').pipe(res)
-    else if (req.url === "/about") fs.createReadStream("./www/about.html").pipe(res);
-    else fs.createReadStream("./www/error.html").pipe(res)
+app.get('/', (req, res) => {
+    res.render('index')
 });
 
-const PORT = 3000;
-const HOST = 'localhost';
+app.get('/about', (req, res) => {
+    res.render('about')
+})
 
-server.listen(PORT, HOST, () => {
-    console.log(`Сервер запущено: http://${HOST}:${PORT}`)
+const data = (req) => ({
+    username: req.params.username,
+    hobbies: ['football', 'skate', 'basketball']
+})
+
+app.get('/user/:username', (req, res) => {
+    res.render('user', data(req));
+})
+
+const PORT = 3000;
+app.listen(3000, () => {
+    console.log(`Server started: http://localhost:${PORT}`)
 })
