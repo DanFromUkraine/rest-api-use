@@ -1,17 +1,11 @@
 import {
-  ConnectBtn,
   Data,
   DeleteBtn,
   GetBtn,
-  HeadBtn,
-  OptionsBtn,
   PatchBtn,
   PostBtn,
   PutBtn,
-  TraceBtn,
-  Button
 } from "./components";
-
 
 import ActionDescription from "./components/ActionDescription";
 import ExecuteBtn from "./components/ExecuteBtn";
@@ -25,11 +19,8 @@ export default function App() {
         <PutBtn />
         <DeleteBtn />
         <PatchBtn />
-        <HeadBtn />
-        <OptionsBtn />
-        <ConnectBtn />
-        <TraceBtn />
-        <ExecuteBtn className="bg-red-500 hover:bg-red-400"/>
+        <ExecuteBtn className="bg-red-500 hover:bg-red-400" />
+
       </div>
       <div className="w-full flex flex-col justify-between items-center">
         <Data />

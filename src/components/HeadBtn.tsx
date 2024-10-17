@@ -4,6 +4,6 @@ import { blueActionClick } from "../redux/mainSlice"
 
 export default function HeadBtn() {
   return (
-    <Button onClick={() => store.dispatch(blueActionClick("GET"))}>Head</Button>
+    <Button onClick={() => store.dispatch(blueActionClick("HEAD"))}>Head</Button>
   )
 }

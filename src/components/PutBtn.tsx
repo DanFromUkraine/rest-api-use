@@ -1,5 +1,7 @@
 import Button from "./Button";
+import { store } from "../redux/store";
+import { blueActionClick } from "../redux/mainSlice";
 
 export default function PutBtn() {
-  return <Button onClick={() => {}}>Put</Button>;
+  return <Button onClick={() => store.dispatch(blueActionClick("PUT"))}>Put</Button>;
 }

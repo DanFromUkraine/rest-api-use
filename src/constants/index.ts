@@ -12,7 +12,10 @@ export const ActionDescriptionTexts:ActionDescription = {
   OPTIONS: "Get available actions to do with server",
   TRACE: "",
   CONNECT: "",
+  HEAD: "Get last headers of requests"
 };
 
 
 export const AVAILABLE_ACTIONS = Object.keys(ActionDescriptionTexts);
+
+export const baseUrl = "/";
