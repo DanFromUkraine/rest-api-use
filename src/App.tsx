@@ -10,7 +10,7 @@ import {
 import ActionDescription from "./components/ActionDescription";
 import ExecuteBtn from "./components/ExecuteBtn";
 
-import { QueryClientProvider, QueryClient, useQuery } from "react-query";
+import { QueryClientProvider, QueryClient } from "react-query";
 import Input from "./components/Input";
 
 const queryClient = new QueryClient();
