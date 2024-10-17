@@ -1,8 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AVAILABLE_ACTIONS } from "../constants";
+import axios from "axios";
 
 const initialState = {
   actionChoosen: "",
+  currDataText: "const currDataText = useAppSelector(state => state.currDataText)",
+};
+
+type exeBtnType = {
+  type: string;
 };
 
 const mainSlice = createSlice({
@@ -20,8 +26,12 @@ const mainSlice = createSlice({
         );
       }
     },
+    executeButtonClick(state, action: exeBtnType) {
+      axios({method: state.actionChoosen})
+    },
   },
 });
+
 
 export const { blueActionClick } = mainSlice.actions;
 export default mainSlice.reducer;
