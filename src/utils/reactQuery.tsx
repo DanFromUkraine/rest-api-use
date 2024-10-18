@@ -1,27 +1,40 @@
 import axios from "axios";
-import { useQuery } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import { ALLOWED_ACTIONS } from "../constants";
 
-
-type useQueryMultitoolParamsType = {
+type useMutateParamsType = {
   method: ALLOWED_ACTIONS;
   modifier?: string;
 };
 
-function useQueryMultitool({
-  method,
-  modifier = "",
-}: useQueryMultitoolParamsType) {
-  const { data, isLoading, error } = useQuery({
-    queryKey: "general request",
-    queryFn: () =>
+export type useGetOutputType = {
+  data: string;
+  isLoading: boolean;
+  error: unknown;
+  refetch: () => void;
+};
+
+function useGet(modifier?: string): useGetOutputType {
+  const { data, isLoading, error, refetch } = useQuery({
+    queryKey: "get",
+    queryFn: () => axios.get("http://localhost:3000/my_data/" + modifier),
+  });
+
+  return { data: JSON.stringify(data?.data), isLoading, error, refetch };
+}
+
+function useMutate({ method, modifier = "" }: useMutateParamsType) {
+  const { mutate, isLoading, error } = useMutation({
+    mutationKey: "mutate",
+    mutationFn: (newInfo) =>
       axios({
-        method,
-        url: "http://localhost:3000/my_data/" + modifier
+        method: method,
+        url: "http://localhost:3000/my_data/" + modifier,
+        data: method !== "delete" ? newInfo : undefined,
       }),
   });
 
-  return { data: JSON.stringify(data?.data), isLoading, error };
+  return { mutate, isLoading, error };
 }
 
-export { useQueryMultitool };
+export { useGet, useMutate };

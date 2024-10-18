@@ -7,9 +7,10 @@ import {
 import { ALLOWED_ACTIONS } from "../constants";
 // import axios from "axios";
 import { valuesType } from "../components/Input";
+import { useGetOutputType } from "../utils/reactQuery";
 
 export type stateType = {
-  actionChoosen: ALLOWED_ACTIONS;
+  actionChosen: ALLOWED_ACTIONS;
   currDataText: string;
   inp_data: {
     inp_address: string;
@@ -33,8 +34,13 @@ type executeButtonClickActionType = {
   };
 };
 
+type loadGetResponseActionType = {
+  type: string;
+  payload: useGetOutputType;
+};
+
 const initialState: stateType = {
-  actionChoosen: "",
+  actionChosen: "",
   currDataText:
     "const currDataText = useAppSelector(state => state.currDataText)",
   inp_data: {
@@ -49,7 +55,7 @@ const mainSlice = createSlice({
   initialState,
   reducers: {
     blueActionClick(state, action: { type: string; payload: ALLOWED_ACTIONS }) {
-      state.actionChoosen = action.payload;
+      state.actionChosen = action.payload;
     },
     uploadInputData(state, action: uploadInpDataType) {
       state.inp_data = action.payload;
@@ -57,13 +63,12 @@ const mainSlice = createSlice({
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     executeButtonClick(state, action: executeButtonClickActionType) {
-      if (state.actionChoosen) {
+      if (state.actionChosen) {
         const { data, isLoading, error } = action.payload;
 
         state.currDataText = !isLoading ? data : "Loading...";
         state.error = typeof error === "string" ? error : state.error;
-        state.actionChoosen = "";
-
+        state.actionChosen = "";
       } else {
         throw "no action chosen";
       }
@@ -75,6 +80,11 @@ const mainSlice = createSlice({
     clearError(state, _action: { type: string }) {
       state.error = "";
     },
+    loadGetResponse(state, action: loadGetResponseActionType) {
+      const { data, isLoading, error } = action.payload;
+      state.currDataText = !isLoading ? data : "Loading...";
+      state.error = typeof error === "string" ? error : state.error;
+    },
   },
 });
 
@@ -84,5 +94,6 @@ export const {
   uploadInputData,
   writeError,
   clearError,
+  loadGetResponse
 } = mainSlice.actions;
 export default mainSlice.reducer;

@@ -14,14 +14,7 @@ type InputFormType = {
 const InputForm = ({ label, ...props }: InputFormType) => {
   const [field] = useField(props);
 
-  return (
-    <TextField
-      label={label}
-      variant="standard"
-      {...field}
-      {...props}
-    />
-  );
+  return <TextField label={label} variant="standard" {...field} {...props} />;
 };
 
 export type valuesType = {
@@ -36,7 +29,6 @@ type utilsType = {
 export default function Input() {
   const onSubmit = useCallback((values: valuesType, utils: utilsType) => {
     store.dispatch(uploadInputData(values));
-    store.dispatch(executeButtonClick());
     utils.resetForm();
   }, []);
 

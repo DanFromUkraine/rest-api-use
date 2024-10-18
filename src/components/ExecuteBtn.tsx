@@ -1,16 +1,34 @@
-import { executeButtonClick } from "../redux/mainSlice";
+import { executeButtonClick, loadGetResponse } from "../redux/mainSlice";
 import { store } from "../redux/store";
-import { useQueryMultitool } from "../utils/reactQuery";
+import { useGet, useMutate, useQueryMultitool } from "../utils/reactQuery";
 import Button from "./Button";
 import { useAppSelector } from "../redux/hooks";
+import { useEffect } from "react";
 
 export default function ExecuteBtn({ className }: { className: string }) {
-  const actionChoosen = useAppSelector((state) => state.actionChoosen);
-  const data_obj = executeButtonClick(
-    useQueryMultitool({ method: actionChoosen })
+  const method = useAppSelector((state) => state.actionChosen);
+  const { inp_address: modifier, inp_text } = useAppSelector(
+    (state) => state.inp_data
   );
 
-  const onClick = () => store.dispatch({ ...data_obj });
+  const { mutate, isLoading: isLoadingMutate } = useMutate({
+    method: method,
+    modifier,
+  });
+
+  const {
+    data,
+    isLoading: isLoadingRequest,
+    error,
+    refetch,
+  } = useGet(modifier);
+  useEffect(() => {
+    store.dispatch(
+      loadGetResponse({ data, isLoading: isLoadingRequest, error })
+    );
+  }, [data, isLoadingRequest, error]);
+
+  const onClick = method === "get" ? () => refetch() : () => mutate({text: inp_text});
 
   return (
     <Button onClick={onClick} className={className}>
