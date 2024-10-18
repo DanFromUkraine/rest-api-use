@@ -7,7 +7,6 @@ import {
 import { ALLOWED_ACTIONS } from "../constants";
 // import axios from "axios";
 import { valuesType } from "../components/Input";
-import { useQueryMultitool } from "../utils/reactQuery";
 
 export type stateType = {
   actionChoosen: ALLOWED_ACTIONS;
@@ -24,11 +23,6 @@ type uploadInpDataType = {
   type: string;
   payload: valuesType;
 };
-
-// type actionType<T> = {
-//   type: string;
-//   payload: T;
-// };
 
 type executeButtonClickActionType = {
   type: string;
@@ -68,7 +62,8 @@ const mainSlice = createSlice({
 
         state.currDataText = !isLoading ? data : "Loading...";
         state.error = typeof error === "string" ? error : state.error;
-        
+        state.actionChoosen = "";
+
       } else {
         throw "no action chosen";
       }

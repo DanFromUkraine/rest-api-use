@@ -21,7 +21,7 @@ function useQueryMultitool({
       }),
   });
 
-  return { data: JSON.stringify(data), isLoading, error };
+  return { data: JSON.stringify(data?.data), isLoading, error };
 }
 
 export { useQueryMultitool };

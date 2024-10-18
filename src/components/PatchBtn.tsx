@@ -3,5 +3,5 @@ import { store } from "../redux/store";
 import { blueActionClick } from "../redux/mainSlice";
 
 export default function PatchBtn() {
-  return <Button onClick={() => store.dispatch(blueActionClick("PATCH"))}>Patch</Button>;
+  return <Button onClick={() => store.dispatch(blueActionClick("patch"))}>Patch</Button>;
 }
