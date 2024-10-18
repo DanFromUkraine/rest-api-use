@@ -30,6 +30,15 @@ type uploadInpDataType = {
 //   payload: T;
 // };
 
+type executeButtonClickActionType = {
+  type: string;
+  payload: {
+    data: string;
+    error: unknown;
+    isLoading: boolean;
+  };
+};
+
 const initialState: stateType = {
   actionChoosen: "",
   currDataText:
@@ -45,7 +54,7 @@ const mainSlice = createSlice({
   name: "main",
   initialState,
   reducers: {
-    blueActionClick(state, action: {type:string, payload:ALLOWED_ACTIONS}) {
+    blueActionClick(state, action: { type: string; payload: ALLOWED_ACTIONS }) {
       state.actionChoosen = action.payload;
     },
     uploadInputData(state, action: uploadInpDataType) {
@@ -53,9 +62,13 @@ const mainSlice = createSlice({
     },
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    executeButtonClick(state, _action: { type: string }) {
+    executeButtonClick(state, action: executeButtonClickActionType) {
       if (state.actionChoosen) {
-        useQueryMultitool({ method: state.actionChoosen });
+        const { data, isLoading, error } = action.payload;
+
+        state.currDataText = !isLoading ? data : "Loading...";
+        state.error = typeof error === "string" ? error : state.error;
+        
       } else {
         throw "no action chosen";
       }

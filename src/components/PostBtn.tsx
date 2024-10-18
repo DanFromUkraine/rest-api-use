@@ -8,7 +8,7 @@ import { store } from "../redux/store";
 export default function PostBtn() {
 
   const onClick = useCallback(
-    () => store.dispatch(blueActionClick("POST")),
+    () => store.dispatch(blueActionClick("post")),
     []
   );
 

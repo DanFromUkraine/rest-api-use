@@ -1,9 +1,10 @@
 import axios from "axios";
 import { useQuery } from "react-query";
+import { ALLOWED_ACTIONS } from "../constants";
 
 
 type useQueryMultitoolParamsType = {
-  method: "get" | "post" | "patch" | "delete" | "put";
+  method: ALLOWED_ACTIONS;
   modifier?: string;
 };
 
@@ -16,11 +17,11 @@ function useQueryMultitool({
     queryFn: () =>
       axios({
         method,
-        url: "http://localhost:3000/my_data/" + modifier,
+        url: "http://localhost:3000/my_data/" + modifier
       }),
   });
 
-  return { data, isLoading, error };
+  return { data: JSON.stringify(data), isLoading, error };
 }
 
 export { useQueryMultitool };
