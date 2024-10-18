@@ -4,7 +4,7 @@ import Button from "./Button";
 
 export default function DeleteBtn() {
   return (
-    <Button onClick={() => store.dispatch(blueActionClick("DELETE"))}>
+    <Button onClick={() => store.dispatch(blueActionClick("delete"))}>
       Delete
     </Button>
   );

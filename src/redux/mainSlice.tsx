@@ -4,12 +4,13 @@ import {
   ThunkDispatch,
   UnknownAction,
 } from "@reduxjs/toolkit";
-import { AVAILABLE_ACTIONS } from "../constants";
-import axios from "axios";
+import { ALLOWED_ACTIONS } from "../constants";
+// import axios from "axios";
 import { valuesType } from "../components/Input";
+import { useQueryMultitool } from "../utils/reactQuery";
 
 export type stateType = {
-  actionChoosen: string;
+  actionChoosen: ALLOWED_ACTIONS;
   currDataText: string;
   inp_data: {
     inp_address: string;
@@ -44,16 +45,8 @@ const mainSlice = createSlice({
   name: "main",
   initialState,
   reducers: {
-    blueActionClick(state, action) {
-      if (AVAILABLE_ACTIONS.includes(action.payload)) {
-        state.actionChoosen = action.payload;
-      } else {
-        throw (
-          action.payload +
-          " is not in AVAILABLE_ACTIONS " +
-          AVAILABLE_ACTIONS.join(", ")
-        );
-      }
+    blueActionClick(state, action: {type:string, payload:ALLOWED_ACTIONS}) {
+      state.actionChoosen = action.payload;
     },
     uploadInputData(state, action: uploadInpDataType) {
       state.inp_data = action.payload;
@@ -62,11 +55,7 @@ const mainSlice = createSlice({
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     executeButtonClick(state, _action: { type: string }) {
       if (state.actionChoosen) {
-        console.log(window.location.href);
-        axios({
-          method: state.actionChoosen,
-          url: window.location.href + state.inp_data.inp_address,
-        });
+        useQueryMultitool({ method: state.actionChoosen });
       } else {
         throw "no action chosen";
       }
