@@ -7,7 +7,7 @@ import {
 import { ALLOWED_ACTIONS } from "../constants";
 // import axios from "axios";
 import { valuesType } from "../components/Input";
-import { useGetOutputType } from "../utils/reactQuery";
+import { useGetType } from "../utils/reactQuery";
 
 export type stateType = {
   actionChosen: ALLOWED_ACTIONS;
@@ -36,7 +36,7 @@ type executeButtonClickActionType = {
 
 type loadGetResponseActionType = {
   type: string;
-  payload: useGetOutputType;
+  payload: useGetType;
 };
 
 const initialState: stateType = {

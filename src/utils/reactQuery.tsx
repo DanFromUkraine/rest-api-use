@@ -7,10 +7,13 @@ type useMutateParamsType = {
   modifier?: string;
 };
 
-export type useGetOutputType = {
+export type useGetType = {
   data: string;
   isLoading: boolean;
   error: unknown;
+};
+
+type useGetOutputType = useGetType & {
   refetch: () => void;
 };
 
@@ -20,7 +23,7 @@ function useGet(modifier?: string): useGetOutputType {
     queryFn: () => axios.get("http://localhost:3000/my_data/" + modifier),
   });
 
-  return { data: JSON.stringify(data?.data), isLoading, error, refetch };
+  return { data: JSON.stringify(data?.data, undefined), isLoading, error, refetch };
 }
 
 function useMutate({ method, modifier = "" }: useMutateParamsType) {

@@ -1,4 +1,5 @@
 import { useAppSelector } from "../redux/hooks";
+import {JsonSyntaxHighlight} from "../utils/jsonHighlighter"
 
 export default function Data() {
   const currDataText = useAppSelector((state) => state.currDataText);
@@ -9,7 +10,8 @@ export default function Data() {
     <div>
       <h2>Data</h2>
 
-      <code>{currDataText}</code>
+      <JsonSyntaxHighlight json={currDataText}/>      
+      
     </div>
   );
 }

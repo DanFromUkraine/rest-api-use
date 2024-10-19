@@ -1,9 +1,10 @@
-import { executeButtonClick, loadGetResponse } from "../redux/mainSlice";
+import { loadGetResponse } from "../redux/mainSlice";
 import { store } from "../redux/store";
-import { useGet, useMutate, useQueryMultitool } from "../utils/reactQuery";
+import { useGet, useMutate } from "../utils/reactQuery";
 import Button from "./Button";
 import { useAppSelector } from "../redux/hooks";
 import { useEffect } from "react";
+
 
 export default function ExecuteBtn({ className }: { className: string }) {
   const method = useAppSelector((state) => state.actionChosen);
@@ -24,9 +25,9 @@ export default function ExecuteBtn({ className }: { className: string }) {
   } = useGet(modifier);
   useEffect(() => {
     store.dispatch(
-      loadGetResponse({ data, isLoading: isLoadingRequest, error })
+      loadGetResponse({ data, isLoading: isLoadingRequest || isLoadingMutate, error })
     );
-  }, [data, isLoadingRequest, error]);
+  }, [data, isLoadingRequest, error, isLoadingMutate]);
 
   const onClick = method === "get" ? () => refetch() : () => mutate({text: inp_text});
 

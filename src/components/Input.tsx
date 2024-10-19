@@ -2,7 +2,7 @@ import { TextField, Button } from "@mui/material";
 import { Formik, Form, useField } from "formik";
 import { useCallback } from "react";
 import { store } from "../redux/store";
-import { executeButtonClick, uploadInputData } from "../redux/mainSlice";
+import { uploadInputData } from "../redux/mainSlice";
 
 type InputFormType = {
   label: string;
