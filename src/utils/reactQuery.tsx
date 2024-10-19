@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useMutation, useQuery } from "react-query";
 import { ALLOWED_ACTIONS } from "../constants";
+import { UseMutationResult } from "react-query";
+import { AxiosResponse } from "axios";
 
 type useMutateParamsType = {
   method: ALLOWED_ACTIONS;
@@ -23,17 +25,25 @@ function useGet(modifier?: string): useGetOutputType {
     queryFn: () => axios.get("http://localhost:3000/my_data/" + modifier),
   });
 
-  return { data: JSON.stringify(data?.data, undefined), isLoading, error, refetch };
+  return {
+    data: JSON.stringify(data?.data, undefined),
+    isLoading,
+    error,
+    refetch,
+  };
 }
 
-function useMutate({ method, modifier = "" }: useMutateParamsType) {
+function useMutate({
+  method,
+  modifier = "",
+}: useMutateParamsType) {
   const { mutate, isLoading, error } = useMutation({
     mutationKey: "mutate",
-    mutationFn: (newInfo) =>
+    mutationFn: ({text}: {text: string}) =>
       axios({
         method: method,
         url: "http://localhost:3000/my_data/" + modifier,
-        data: method !== "delete" ? newInfo : undefined,
+        data: method !== "delete" ? {text} : undefined,
       }),
   });
 

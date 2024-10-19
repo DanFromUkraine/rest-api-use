@@ -6,7 +6,7 @@ import { useAppSelector } from "../redux/hooks";
 import { useEffect } from "react";
 
 
-export default function ExecuteBtn({ className }: { className: string }) {
+export default function ExecuteBtn() {
   const method = useAppSelector((state) => state.actionChosen);
   const { inp_address: modifier, inp_text } = useAppSelector(
     (state) => state.inp_data
@@ -29,11 +29,9 @@ export default function ExecuteBtn({ className }: { className: string }) {
     );
   }, [data, isLoadingRequest, error, isLoadingMutate]);
 
-  const onClick = method === "get" ? () => refetch() : () => mutate({text: inp_text});
+  const onClick = method === "get" ? () => refetch() : () => mutate({ text: inp_text});
 
   return (
-    <Button onClick={onClick} className={className}>
-      Execute
-    </Button>
+    <Button actionType="execute" onClick={onClick}/>
   );
 }

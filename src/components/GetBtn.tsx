@@ -4,6 +4,6 @@ import Button from "./Button";
 
 export default function GetBtn() {
   return (
-    <Button onClick={() => store.dispatch(blueActionClick("get"))}>Get</Button>
+    <Button actionType="get" onClick={() => store.dispatch(blueActionClick("get"))} />
   );
 }

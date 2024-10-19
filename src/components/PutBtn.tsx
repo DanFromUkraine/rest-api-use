@@ -3,5 +3,10 @@ import { store } from "../redux/store";
 import { blueActionClick } from "../redux/mainSlice";
 
 export default function PutBtn() {
-  return <Button onClick={() => store.dispatch(blueActionClick("put"))}>Put</Button>;
+  return (
+    <Button
+      actionType="put"
+      onClick={() => store.dispatch(blueActionClick("put"))}
+    />
+  );
 }

@@ -25,7 +25,7 @@ export default function App() {
           <PutBtn />
           <DeleteBtn />
           <PatchBtn />
-          <ExecuteBtn className="bg-red-500 hover:bg-red-400" />
+          <ExecuteBtn  />
 
           <Input />
         </div>
