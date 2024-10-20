@@ -7,6 +7,8 @@ import PostBtn from "./PostBtn";
 import PutBtn from "./PutBtn";
 import Button from "./Button";
 
+import ActionDescription from "./ActionDescription";
+
 export {
   Data,
   DeleteBtn,
@@ -16,4 +18,5 @@ export {
   PostBtn,
   PutBtn,
   Button,
+  ActionDescription
 };
