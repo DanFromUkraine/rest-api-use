@@ -36,5 +36,9 @@ describe("ActionDescription", () => {
     await user.click(getButton);
 
     expect(description).toHaveTextContent(ActionDescriptionTexts.get);
+
+    await user.click(getButton);
+
+    expect(description).toHaveTextContent(ActionDescriptionTexts[""]);
   });
 });

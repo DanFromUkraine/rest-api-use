@@ -55,14 +55,14 @@ const mainSlice = createSlice({
   initialState,
   reducers: {
     blueActionClick(state, action: { type: string; payload: ALLOWED_ACTIONS }) {
-      state.actionChosen = action.payload;
+      state.actionChosen = state.actionChosen === "" ? action.payload : "";
     },
     uploadInputData(state, action: uploadInpDataType) {
       state.inp_data = action.payload;
     },
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    executeButtonClick(state, action: executeButtonClickActionType) {
+    executeButtonClick(state, action: executeButtonClickActionType) { // should delete it soon
       if (state.actionChosen) {
         const { data, isLoading, error } = action.payload;
 
