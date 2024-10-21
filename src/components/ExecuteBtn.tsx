@@ -5,15 +5,14 @@ import Button from "./Button";
 import { useAppSelector } from "../redux/hooks";
 import { useEffect } from "react";
 
-
 export default function ExecuteBtn() {
-  const method = useAppSelector((state) => state.actionChosen);
+  const actionChosen = useAppSelector((state) => state.actionChosen);
   const { inp_address: modifier, inp_text } = useAppSelector(
     (state) => state.inp_data
   );
 
   const { mutate, isLoading: isLoadingMutate } = useMutate({
-    method: method,
+    method: actionChosen,
     modifier,
   });
 
@@ -25,13 +24,16 @@ export default function ExecuteBtn() {
   } = useGet(modifier);
   useEffect(() => {
     store.dispatch(
-      loadGetResponse({ data, isLoading: isLoadingRequest || isLoadingMutate, error })
+      loadGetResponse({
+        data,
+        isLoading: isLoadingRequest || isLoadingMutate,
+        error,
+      })
     );
   }, [data, isLoadingRequest, error, isLoadingMutate]);
 
-  const onClick = method === "get" ? () => refetch() : () => mutate({ text: inp_text});
+  const onClick =
+  actionChosen === "get" ? () => refetch() : () => mutate({ text: inp_text });
 
-  return (
-    <Button actionType="execute" onClick={onClick}/>
-  );
+  return <Button actionType="execute" onClick={onClick} />;
 }

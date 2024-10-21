@@ -13,7 +13,7 @@ import ExecuteBtn from "./components/ExecuteBtn";
 import { QueryClientProvider, QueryClient } from "react-query";
 import Input from "./components/Input";
 
-const queryClient = new QueryClient();
+export const queryClient = new QueryClient();
 
 export default function App() {
   return (
