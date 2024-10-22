@@ -1,8 +1,7 @@
 import axios from "axios";
 import { useMutation, useQuery } from "react-query";
 import { ALLOWED_ACTIONS } from "../constants";
-import { UseMutationResult } from "react-query";
-import { AxiosResponse } from "axios";
+
 
 type useMutateParamsType = {
   method: ALLOWED_ACTIONS;

@@ -14,10 +14,10 @@ export function JsonSyntaxHighlight({ json }: { json: string }) {
       );
     });
 
-    return <div>{outputElements}</div>;
+    return <div data-testid="json-cont">{outputElements}</div>;
   } catch {
     return (
-      <div className="text-red-700">{"Connection with server failed :("}</div>
+      <p className="text-red-700">{"Connection with server failed :("}</p>
     );
   }
 }
