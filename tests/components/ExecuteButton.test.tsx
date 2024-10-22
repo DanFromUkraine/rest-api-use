@@ -1,11 +1,9 @@
 import { render, screen } from "@testing-library/react";
-import { describe, it, expect, beforeAll, afterAll } from "vitest";
 import { server } from "../utils/mockServer";
 import { GetBtn, ExecuteBtn, Data } from "../../src/components";
 import { Provider } from "react-redux";
 import { store } from "../../src/redux/store";
 import React from "react";
-import userEvent from "@testing-library/user-event";
 import { QueryClientProvider } from "react-query";
 import { queryClient } from "../../src/App";
 
@@ -32,7 +30,7 @@ describe("ExecuteButton and reactQuery get request", () => {
     const executeButton = screen.getByRole("button", { name: /execute/ });
     const getButton = screen.getByRole("button", { name: /get/ });
     const data = screen.getByRole("paragraph");
-    const user = userEvent.setup();
+    const user = global.userEvent.setup();
 
     await user.click(getButton);
     await user.click(executeButton);
