@@ -8,9 +8,7 @@ export default function Data() {
     <div>
       <h2>Data</h2>
 
-      <p>
-        <JsonSyntaxHighlight json={currDataText} />
-      </p>
+      <JsonSyntaxHighlight json={currDataText} />
     </div>
   );
 }

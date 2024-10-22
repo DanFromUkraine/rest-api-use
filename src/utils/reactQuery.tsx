@@ -23,6 +23,7 @@ function useGet(modifier?: string): useGetOutputType {
   const { data, isLoading, error, refetch } = useQuery({
     queryKey: "get",
     queryFn: () => axios.get("http://localhost:3000/my_data/" + modifier),
+    onError: () => {}
   });
 
   return {
