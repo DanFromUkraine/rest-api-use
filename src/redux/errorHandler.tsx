@@ -10,7 +10,7 @@ const crashReporter: Middleware = (store) => (next) => (action) => {
     return next(action);
   } catch (err) {
     if (typeof err === "string") {
-      store.dispatch(writeError(err));
+      next(writeError(err));
     }
 
     throw err;

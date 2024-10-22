@@ -1,6 +1,14 @@
 import { render, screen } from "@testing-library/react";
 import { server } from "../utils/mockServer";
-import { GetBtn, ExecuteBtn, Data } from "../../src/components";
+import {
+  GetBtn,
+  ExecuteBtn,
+  Data,
+  DeleteBtn,
+  PostBtn,
+  PutBtn,
+  Input,
+} from "../../src/components";
 import { Provider } from "react-redux";
 import { store } from "../../src/redux/store";
 import React from "react";
@@ -14,9 +22,10 @@ describe("ExecuteButton and reactQuery get request", () => {
     const data = screen.getByTestId("json-cont");
     const user = global.userEvent.setup();
     const getButton = screen.getByRole("button", { name: /get/ });
+    const deleteButton = screen.getByRole("button", { name: /delete/ });
+    const input = screen.getByRole("form");
 
-
-    return { executeButton, data, user, getButton };
+    return { executeButton, data, user, getButton, deleteButton, input };
   }
 
   beforeEach(() => {
@@ -28,6 +37,10 @@ describe("ExecuteButton and reactQuery get request", () => {
           <GetBtn />
           <ExecuteBtn />
           <Data />
+          <DeleteBtn />
+          <PostBtn />
+          <PutBtn />
+          <Input />
         </Provider>
       </QueryClientProvider>
     );
@@ -38,7 +51,7 @@ describe("ExecuteButton and reactQuery get request", () => {
   });
 
   it("should handle execute button click, and when action is chosen make a fetch get request", async () => {
-    const {user, data, executeButton} = getEntities();
+    const { user, data, executeButton } = getEntities();
     const getButton = screen.getByRole("button", { name: /get/ });
 
     await user.click(getButton);
@@ -49,14 +62,14 @@ describe("ExecuteButton and reactQuery get request", () => {
     }, 500);
   });
 
-  it("should ignore executeBtn when no action is chosen", () => {
+  it("should ignore executeBtn when no action is chosen", async () => {
     const { user, executeButton } = getEntities();
     const storeSpy = vi.spyOn(store, "subscribe");
 
-    user.click(executeButton);
+    await user.click(executeButton);
 
     expect(storeSpy).not.toHaveBeenCalled();
-
-    screen.debug();
   });
+
+  
 });

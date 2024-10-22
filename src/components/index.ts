@@ -10,6 +10,8 @@ import Button from "./Button";
 import ActionDescription from "./ActionDescription";
 import ExecuteBtn from "./ExecuteBtn";
 
+import Input from "./Input";
+
 export {
   Data,
   DeleteBtn,
@@ -20,5 +22,6 @@ export {
   PutBtn,
   Button,
   ActionDescription,
-  ExecuteBtn
+  ExecuteBtn,
+  Input
 };

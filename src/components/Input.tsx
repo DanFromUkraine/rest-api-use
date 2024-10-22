@@ -44,7 +44,7 @@ export default function Input() {
             label="address"
             placeholder={window.location.href}
           />
-          <InputForm name="inp_text" label="put" placeholder="sdfsdf" />
+          <InputForm name="inp_text" label="put text here" placeholder="sdfsdf" />
           <Button variant="contained" color="success" type="submit">
             Submit
           </Button>
